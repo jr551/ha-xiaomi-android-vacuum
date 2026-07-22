@@ -1,4 +1,4 @@
-"""Sui safety/attention entity."""
+"""Litter-tray cleanup safety/attention entity."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ async def async_setup_entry(
 
 
 class SuiNeedsAttentionSensor(SuiEntity, BinarySensorEntity):
-    """Report Sui failures and the current Xiaomi vacuum safety signal."""
+    """Report scheduler failures and the current Xiaomi vacuum safety signal."""
 
     _attr_name = "Needs attention"
     _attr_device_class = BinarySensorDeviceClass.PROBLEM

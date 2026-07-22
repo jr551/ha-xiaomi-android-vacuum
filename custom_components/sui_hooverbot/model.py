@@ -1,4 +1,4 @@
-"""Pure, dependency-free rules for Sui the Hooverbot's job state machine."""
+"""Pure rules for the litter-tray vacuum cleanup job state machine."""
 
 from __future__ import annotations
 
@@ -78,7 +78,7 @@ def next_morning_dispatch(detected_at: float) -> float:
 
 
 def family_message(dispatch_at: float, *, overnight: bool = False) -> str:
-    """The only notification text Sui asks the opaque bridge to deliver."""
+    """The only notification text the scheduler asks the bridge to deliver."""
     local_time = datetime.fromtimestamp(dispatch_at, LOCAL_TIME_ZONE).strftime("%H:%M")
     timing = (
         "This is the single overnight cleanup; any more litter-tray visits "
@@ -87,7 +87,8 @@ def family_message(dispatch_at: float, *, overnight: bool = False) -> str:
         else "This follows the 10-minute opt-out window and short safety grace."
     )
     return (
-        "💩 The cat used the litter tray. Sui the Hooverbot will hoover the "
+        "💩 The cat used the litter tray. Litter Tray Vacuum Cleanup will "
+        "clean the "
         f"litter-box zone at {local_time}. {timing} Want to skip this cleanup? "
         "React ⏭️, ❌ or 🛑 "
         "to this message before then."
@@ -183,7 +184,7 @@ def bridge_reports_skipped(payload: Mapping[str, Any]) -> bool:
 
 
 def bridge_response_matches(payload: Mapping[str, Any], event_key: str) -> bool:
-    """Require the final bridge response to correlate to this exact Sui job."""
+    """Require the final bridge response to correlate to this exact cleanup job."""
     return payload.get("event_key") == event_key and payload.get("consumer") == "sui_hooverbot"
 
 

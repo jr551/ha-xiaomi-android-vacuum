@@ -1,16 +1,16 @@
 skip:
   name: Skip a scheduled litter-box cleanup
   description: >-
-    Mark one exact bridge-correlated Sui job as skipped. This is intended for
+    Mark one exact bridge-correlated cleanup job as skipped. This is intended for
     the trusted family-reaction bridge or an explicit local automation.
   fields:
     entry_id:
-      name: Sui entry ID
+      name: Cleanup entry ID
       required: true
       selector:
         text:
     job_id:
-      name: Sui job ID
+      name: Cleanup job ID
       required: true
       selector:
         text:
@@ -28,11 +28,11 @@ skip:
 configure_litter_zone:
   name: Configure the fixed litter-box zone
   description: >-
-    Persist one bounded native Dreame rectangle for Sui. Motion remains
+    Persist one bounded native Dreame rectangle for the cleanup. Motion remains
     fail-closed unless the exact rectangle is explicitly approved.
   fields:
     entry_id:
-      name: Sui entry ID
+      name: Cleanup entry ID
       required: true
       selector:
         text:

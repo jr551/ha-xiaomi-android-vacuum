@@ -1,4 +1,4 @@
-"""Native Home Assistant integration for Sui the Hooverbot."""
+"""Native Home Assistant integration for litter-tray vacuum cleanup."""
 
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ from .const import (
     DEFAULT_MAP_CAMERA_ENTITY_ID,
     DEFAULT_VACUUM_ENTITY_ID,
     DOMAIN,
+    INTEGRATION_NAME,
     LEGACY_ANDROID_VACUUM_ENTITY_ID,
     PLATFORMS,
 )
@@ -27,7 +28,9 @@ from .store import SuiScheduleStore
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up Sui without touching the robot during Home Assistant startup."""
+    """Set up the scheduler without touching the robot during startup."""
+    if entry.title != INTEGRATION_NAME:
+        hass.config_entries.async_update_entry(entry, title=INTEGRATION_NAME)
     coordinator = SuiCoordinator(hass, entry)
     bridge = FamilyBridgeClient(
         async_get_clientsession(hass),

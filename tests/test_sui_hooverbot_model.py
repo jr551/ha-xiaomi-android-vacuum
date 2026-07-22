@@ -1,4 +1,4 @@
-"""Pure safety tests for the native Home Assistant Sui integration."""
+"""Pure safety tests for the litter-tray vacuum cleanup integration."""
 
 from __future__ import annotations
 
@@ -67,9 +67,9 @@ class SuiModelTests(unittest.TestCase):
         self.assertNotIn("idempotency_key", public)
         self.assertEqual(public["status"], "notification_sending")
 
-    def test_message_calls_sui_by_name_and_offers_only_skip_reactions(self) -> None:
+    def test_message_uses_product_name_and_offers_only_skip_reactions(self) -> None:
         message = model.family_message(1_700_000_600)
-        self.assertIn("Sui the Hooverbot", message)
+        self.assertIn("Litter Tray Vacuum Cleanup", message)
         self.assertIn("React", message)
         self.assertIn("⏭️", message)
 

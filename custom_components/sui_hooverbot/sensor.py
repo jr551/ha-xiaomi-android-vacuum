@@ -1,4 +1,4 @@
-"""Sui's human-readable schedule/status entity."""
+"""Human-readable litter-tray cleanup schedule/status entity."""
 
 from __future__ import annotations
 

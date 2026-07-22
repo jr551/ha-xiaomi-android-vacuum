@@ -129,5 +129,5 @@ def normalise_config_input(raw: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def schedule_identity(data: Mapping[str, Any]) -> str:
-    """One physical counter/vacuum pair may have only one Sui scheduler."""
+    """One physical counter/vacuum pair may have only one cleanup scheduler."""
     return f"{data[CONF_COUNTER_ENTITY_ID]}:{data[CONF_VACUUM_ENTITY_ID]}"

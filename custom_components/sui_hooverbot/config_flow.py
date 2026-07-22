@@ -1,4 +1,4 @@
-"""UI config flow for the native Sui the Hooverbot integration."""
+"""UI config flow for the Litter Tray Vacuum Cleanup integration."""
 
 from __future__ import annotations
 
@@ -32,12 +32,13 @@ from .const import (
     DEFAULT_REACTION_GRACE_SECONDS,
     DEFAULT_VACUUM_ENTITY_ID,
     DOMAIN,
+    INTEGRATION_NAME,
 )
 from .validation import litter_zone_text, normalise_config_input, schedule_identity
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Create one bridge-backed, fixed-zone Sui schedule."""
+    """Create one bridge-backed, fixed-zone litter-tray cleanup schedule."""
 
     VERSION = 2
 
@@ -54,7 +55,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 await self.async_set_unique_id(schedule_identity(data))
                 self._abort_if_unique_id_configured()
                 data[CONF_WEBHOOK_ID] = webhook.async_generate_id()
-                return self.async_create_entry(title="Sui the Hooverbot", data=data)
+                return self.async_create_entry(title=INTEGRATION_NAME, data=data)
 
         defaults = user_input or {}
         return self.async_show_form(

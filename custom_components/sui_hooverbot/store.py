@@ -1,4 +1,4 @@
-"""Atomic Home Assistant Store wrapper for small Sui schedule records."""
+"""Atomic Home Assistant Store wrapper for small cleanup schedule records."""
 
 from __future__ import annotations
 

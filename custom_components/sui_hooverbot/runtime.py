@@ -1,4 +1,4 @@
-"""Event-driven, persisted schedule runtime for Sui the Hooverbot."""
+"""Event-driven, persisted runtime for litter-tray vacuum cleanup."""
 
 from __future__ import annotations
 
@@ -165,7 +165,7 @@ class SuiRuntime:
             webhook.async_register(
                 self.hass,
                 DOMAIN,
-                "Sui the Hooverbot skip callback",
+                "Litter Tray Vacuum Cleanup skip callback",
                 self.webhook_id,
                 self.async_handle_webhook,
                 local_only=False,
@@ -338,11 +338,11 @@ class SuiRuntime:
 
     @callback
     def _handle_vacuum_event(self, _event: Event) -> None:
-        """Mirror the existing Xiaomi safety signal into Sui's status now."""
+        """Mirror the existing Xiaomi safety signal into cleanup status now."""
         self.coordinator.publish()
 
     async def async_handle_counter_state(self, state: State) -> None:
-        """Turn only a genuine increasing MiniNook count into one Sui job."""
+        """Turn only a genuine increasing MiniNook count into one cleanup job."""
         try:
             count = parse_counter(state.state)
             source_event_key = valid_identifier(state.last_changed.isoformat())
@@ -494,7 +494,7 @@ class SuiRuntime:
     async def _async_mark_skipped_locked(
         self, job: dict[str, Any] | None, reaction_event_id: Any, reaction: Any
     ) -> str:
-        """Atomically accept one allowed reaction before Sui claims dispatch."""
+        """Atomically accept one allowed reaction before dispatch is claimed."""
         event_id = valid_identifier(reaction_event_id)
         reaction = normalise_reaction(reaction)
         if event_id in self.store.data["processed_events"]:
@@ -699,7 +699,7 @@ class SuiRuntime:
             return
         # The map refresh and bridge final check both await. Re-check the
         # observed Xiaomi safety state immediately before the one physical
-        # request, so a manual start/error cannot be raced into by Sui.
+        # request, so a manual start/error cannot be raced by the scheduler.
         if not self._vacuum_is_ready():
             await self._retry_or_miss_locked(job, "vacuum_not_ready_before_start")
             return

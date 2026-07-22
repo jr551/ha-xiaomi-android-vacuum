@@ -12,7 +12,7 @@ and this bridge:
 {
   "event_key": "opaque-stable-event-key",
   "consumer": "sui_hooverbot",
-  "text": "Sui the Hooverbot will vacuum in about 10 minutes. React ⏭️, ❌ or 🛑 to skip this cleanup.",
+  "text": "Litter Tray Vacuum Cleanup will clean in about 10 minutes. React ⏭️, ❌ or 🛑 to skip this cleanup.",
   "deadline_at": "2026-07-19T15:10:30Z",
   "callback_url": "https://home-assistant.example.com/api/webhook/<unguessable-webhook-id>"
 }

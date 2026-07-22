@@ -1,4 +1,4 @@
-"""Narrow trusted-HA skip service for Sui callbacks and manual controls."""
+"""Narrow trusted-HA skip service for cleanup callbacks and controls."""
 
 from __future__ import annotations
 
@@ -45,7 +45,7 @@ async def async_register_services(hass: HomeAssistant) -> None:
     async def handle_skip(call: ServiceCall) -> None:
         runtime: SuiRuntime | None = hass.data.get(DOMAIN, {}).get(call.data["entry_id"])
         if runtime is None:
-            raise HomeAssistantError("Sui the Hooverbot entry is not loaded")
+            raise HomeAssistantError("Litter Tray Vacuum Cleanup entry is not loaded")
         await runtime.async_mark_skipped_local(
             job_id=call.data["job_id"],
             reaction_event_id=call.data["reaction_event_id"],
@@ -55,7 +55,7 @@ async def async_register_services(hass: HomeAssistant) -> None:
     async def handle_configure_litter_zone(call: ServiceCall) -> None:
         runtime: SuiRuntime | None = hass.data.get(DOMAIN, {}).get(call.data["entry_id"])
         if runtime is None:
-            raise HomeAssistantError("Sui the Hooverbot entry is not loaded")
+            raise HomeAssistantError("Litter Tray Vacuum Cleanup entry is not loaded")
         approved = bool(call.data[CONF_LITTER_ZONE_APPROVED])
         try:
             zone = normalise_litter_zone(

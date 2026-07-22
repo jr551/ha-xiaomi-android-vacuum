@@ -1,4 +1,4 @@
-"""Constants for the native Sui the Hooverbot integration."""
+"""Constants for the Litter Tray Vacuum Cleanup integration."""
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ from typing import Final
 
 
 DOMAIN: Final = "sui_hooverbot"
+INTEGRATION_NAME: Final = "Litter Tray Vacuum Cleanup"
 PLATFORMS: Final = ["binary_sensor", "sensor"]
 
 CONF_BRIDGE_URL: Final = "bridge_url"

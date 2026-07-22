@@ -1,24 +1,24 @@
-# Sui the Hooverbot
+# Litter Tray Vacuum Cleanup
 
-Sui is a native Home Assistant custom integration. It owns the litter-tray
+Litter Tray Vacuum Cleanup is a native Home Assistant custom integration. It owns the litter-tray
 trigger, durable countdown, skip decision, and one explicitly approved direct
 Dreame zone call. The family bridge is only an opaque message/reaction
 transport; it never schedules or controls the vacuum.
 
 ## Behaviour
 
-1. Sui listens for a real increase in `sensor.mininook_excretion_times_day`.
+1. The scheduler listens for a real increase in `sensor.mininook_excretion_times_day`.
    Its first healthy observation establishes a baseline, so installing or
    restarting it can never clean for an old cat visit.
 2. The integration saves a job through Home Assistant's atomic `Store` before
    it asks the bridge to notify the family.
-3. The bridge receives one fixed Sui message. The family can react `⏭️`, `❌`,
+3. The bridge receives one fixed cleanup message. The family can react `⏭️`, `❌`,
    or `🛑` to skip that exact job.
-4. At 10 minutes, Sui enters a 30-second configurable reaction grace period.
+4. At 10 minutes, the scheduler enters a 30-second configurable reaction grace period.
    Its family message states the actual 10-minute-30-second scheduled start.
    At that time it checks the bridge one final time immediately before the
    only physical zone-start call.
-5. If still active, Sui calls only
+5. If still active, the scheduler calls only
    `dreame_vacuum.vacuum_request_map` and
    `dreame_vacuum.vacuum_clean_zone`. The latter always uses the one bounded,
    visually approved `litter_box` rectangle, one pass, and Standard suction.
@@ -41,13 +41,13 @@ Content-Type: application/json
 {
   "event_key": "sui:<entry-id>:<job-id>",
   "consumer": "sui_hooverbot",
-  "text": "...fixed Sui message...",
+  "text": "...fixed cleanup message...",
   "deadline_at": "2026-07-19T12:10:00Z",
   "callback_url": "https://your-ha.example/api/webhook/<opaque-id>"
 }
 ```
 
-`deadline_at` is the hard 10-minute opt-out cutoff; Sui waits through its
+`deadline_at` is the hard 10-minute opt-out cutoff; the scheduler waits through its
 short safety grace after that cutoff before its final status check. The bridge
 responds with `{"status":"pending"}`. The bridge keeps any WhatsApp message ID and
 raw reaction data private. Once it has verified an allowed reaction against
@@ -62,21 +62,21 @@ that exact outbound message, it POSTs the callback URL:
 }
 ```
 
-The webhook ID is randomly generated per configuration entry. Sui deduplicates
+The webhook ID is randomly generated per configuration entry. The scheduler deduplicates
 `reaction_event_id`, accepts only the three skip reactions, and gives no
 job-existence details to the callback sender. A trusted local Home Assistant
 automation may also fire the `sui_hooverbot_skip` event (with `entry_id`, the
 safe `job_id`, `reaction_event_id`, and `reaction`) or call
 `sui_hooverbot.skip` with the same fields.
 
-The callback body is authenticated before Sui parses it. The bridge sends
+The callback body is authenticated before the scheduler parses it. The bridge sends
 `X-Family-Reaction-Timestamp` and `X-Family-Reaction-Signature` headers; the
 signature is HMAC-SHA256 over
 `family-reaction-callback-v1.<timestamp>.<raw JSON body>`, using the existing
-bridge bearer token as its key. Sui accepts only a matching, fresh callback
+bridge bearer token as its key. The scheduler accepts only a matching, fresh callback
 (five-minute window), then still deduplicates `reaction_event_id`.
 
-Immediately before it calls the direct zone service, Sui asks the bridge:
+Immediately before it calls the direct zone service, the scheduler asks the bridge:
 
 ```http
 GET /v1/messages/<event_key>
@@ -109,12 +109,16 @@ Install this folder at:
 /config/custom_components/sui_hooverbot/
 ```
 
-After Home Assistant restarts, add **Sui the Hooverbot** through
+After Home Assistant restarts, add **Litter Tray Vacuum Cleanup** through
 **Settings → Devices & services → Add integration**. Its UI form defaults to
 the established MiniNook counter, direct Dreame vacuum, and current-map
 camera. The zone approval checkbox is deliberately separate from the
 coordinates. Existing entries migrate from the retired Android entity to the
 direct entity with motion disabled until a rectangle is explicitly approved.
+
+The internal domain remains `sui_hooverbot` for backward compatibility, so
+existing entity IDs, stored jobs, service names, webhook registration, and
+bridge correlation keys do not change during this rebrand.
 
 ## Local verification
 

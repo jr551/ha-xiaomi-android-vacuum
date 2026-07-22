@@ -1,4 +1,4 @@
-"""Push-style coordinator for Sui's durable schedule snapshot."""
+"""Push-style coordinator for the durable cleanup schedule snapshot."""
 
 from __future__ import annotations
 

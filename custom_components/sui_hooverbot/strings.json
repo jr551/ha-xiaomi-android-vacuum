@@ -2,7 +2,7 @@
   "config": {
     "step": {
       "user": {
-        "title": "Sui the Hooverbot",
+        "title": "Litter Tray Vacuum Cleanup",
         "description": "Schedule one approved direct Dreame litter-box cleanup after a MiniNook counter increase. The family bridge only transports the opt-out notification and exact reaction callback.",
         "data": {
           "counter_entity_id": "Cat-litter counter entity",
@@ -22,14 +22,14 @@
       "invalid_input": "Check the entity IDs, bridge URL/token, and timing values."
     },
     "abort": {
-      "already_configured": "This Sui counter, vacuum, and bridge combination is already configured."
+      "already_configured": "This counter, vacuum, and bridge combination is already configured."
     }
   },
   "options": {
     "step": {
       "init": {
-        "title": "Sui direct vacuum settings",
-        "description": "The fixed rectangle is the only scheduled motion target. Leave approval off to keep Sui fail-closed.",
+        "title": "Litter Tray Vacuum Cleanup settings",
+        "description": "The fixed rectangle is the only scheduled motion target. Leave approval off to keep the cleanup fail-closed.",
         "data": {
           "counter_entity_id": "Cat-litter counter entity",
           "vacuum_entity_id": "Direct Dreame vacuum entity",

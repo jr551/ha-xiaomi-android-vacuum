@@ -25,11 +25,11 @@ class BridgeUnavailable(BridgeError):
 
 
 class BridgeRejected(BridgeError):
-    """The bridge rejected a narrow Sui request or status was ambiguous."""
+    """The bridge rejected a narrow cleanup request or status was ambiguous."""
 
 
 class FamilyBridgeClient:
-    """Only send Sui prompts and inspect their final reaction state."""
+    """Only send cleanup prompts and inspect their final reaction state."""
 
     def __init__(self, session: ClientSession, base_url: str, token: str) -> None:
         self._session = session
