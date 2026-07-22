@@ -3,8 +3,10 @@
   "name": "Litter Tray Vacuum Cleanup",
   "codeowners": ["@jr551"],
   "config_flow": true,
+  "documentation": "https://github.com/jr551/ha-litter-tray-vacuum-cleanup",
   "integration_type": "service",
   "iot_class": "local_push",
+  "issue_tracker": "https://github.com/jr551/ha-litter-tray-vacuum-cleanup/issues",
   "requirements": [],
   "version": "0.2.1"
 }

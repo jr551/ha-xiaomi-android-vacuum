@@ -6,6 +6,8 @@ notifies the family, honours a narrow reaction-based skip window, and then
 uses the direct Dreame/Xiaomi cloud integration to sweep one explicitly
 approved native map rectangle.
 
+Repository: <https://github.com/jr551/ha-litter-tray-vacuum-cleanup>
+
 The retired Android/Xiaomi Home gesture gateway is intentionally absent. The
 generic Android MCP forwarder remains in `gateway/android-mcp-forward` for
 unrelated phone-control projects, and the neutral family reaction bridge
